@@ -12,7 +12,7 @@ import {
   Typography
 } from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
-import {purple, blue} from '@ant-design/colors'
+import {blue} from '@ant-design/colors'
 
 export default function Home() {
   const [url, setUrl] = React.useState<string>('');
