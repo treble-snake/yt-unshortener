@@ -87,8 +87,10 @@ export default function Home() {
         color: 'white',
         backgroundColor: blue.primary,
         textAlign: 'center',
-        fontSize: 36,
-        fontWeight: 'bold'
+        fontSize: 24,
+        fontWeight: 'bold',
+        height: 'auto',
+        minHeight: 64,
       }}>
         YouTube UnShortener
       </Header>
