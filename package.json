@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.2.1",
     "@vercel/analytics": "^1.5.0",
     "antd": "^5.24.2",
     "next": "^15.3.4",

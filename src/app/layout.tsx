@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next"
+import type {Metadata} from "next";
+import {Geist, Geist_Mono} from "next/font/google";
+import {Analytics} from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,21 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YouTube Unshort",
-  description: "To show YouTube shorts as normal videos",
+  title: "YouTube URL UnShortener",
+  description: "To share YouTube shorts as normal videos",
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{height: '100%'}}>
-      <body style={{height: '100%', padding: 0, margin: 0}} className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-        <Analytics />
-      </body>
+    <html lang="en" style={{height: '100%', padding: 0, margin: 0}}>
+    <body style={{height: '100%', padding: 0, margin: 0}}
+          className={`${geistSans.variable} ${geistMono.variable}`}>
+    {children}
+    <Analytics/>
+    </body>
     </html>
   );
 }

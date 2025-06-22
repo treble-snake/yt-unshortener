@@ -12,6 +12,7 @@ import {
   Typography
 } from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
+import {purple, blue} from '@ant-design/colors'
 
 export default function Home() {
   const [url, setUrl] = React.useState<string>('');
@@ -23,6 +24,7 @@ export default function Home() {
 
   const {Compact} = Space;
   const {Text, Paragraph} = Typography;
+  const {Header, Footer, Content} = Layout;
 
   const transformUrl = (url: string) => {
     setIsError(false)
@@ -80,62 +82,80 @@ export default function Home() {
   )
 
   return (
-    <Layout style={{padding: '24px', width: '100%', height: '100%'}}>
-      <Flex style={{width: '100%', height: '100%'}} justify={'center'}
-            align={'center'}>
-        <Space direction={'vertical'} style={{textAlign: 'center'}}>
-          <Text type={'secondary'}>
-            Enter a short YouTube video URL and get a
-            link to the same video as a regular (not short) one.
-          </Text>
-          <Popover content={popover}>
-            <Button type="dashed" shape="round"
-                    icon={<QuestionCircleOutlined/>}>
-              What? Why?
-            </Button>
-          </Popover>
+    <Layout style={{width: '100%', height: '100%'}}>
+      <Header style={{
+        color: 'white',
+        backgroundColor: blue.primary,
+        textAlign: 'center',
+        fontSize: 36,
+        fontWeight: 'bold'
+      }}>
+        YouTube UnShortener
+      </Header>
+      <Content style={{
+        padding: 24
+      }}>
+        <Flex style={{width: '100%', height: '100%'}} justify={'center'}
+              align={'center'}>
+          <Space direction={'vertical'} style={{textAlign: 'center'}}>
 
-          <Compact>
-            <Input
-              placeholder="Short video URL" value={url}
-              allowClear
-              onChange={onInputChange}
-              status={
-                isError ? 'error' : undefined
+            <Text type={'secondary'}>
+              Enter a short YouTube video URL and get a
+              link to the same video as a regular (not short) one.
+            </Text>
+            <Popover content={popover}>
+              <Button type="dashed" shape="round"
+                      icon={<QuestionCircleOutlined/>}>
+                What? Why?
+              </Button>
+            </Popover>
+
+            <Compact>
+              <Input
+                placeholder="Short video URL" value={url}
+                allowClear
+                onChange={onInputChange}
+                status={
+                  isError ? 'error' : undefined
+                }
+              />
+              <Button type="primary" onClick={paste}>Paste URL</Button>
+            </Compact>
+            <Checkbox
+              checked={autoCopy}
+              onChange={() => setAutoCopy(!autoCopy)}
+            >
+              <Text italic type={'secondary'}>Auto-copy result to
+                clipboard</Text>
+            </Checkbox>
+            <Space direction={'vertical'}>
+              {
+                isError && <Text
+                  type="danger">Error: {unshortenedUrl}</Text>
               }
-            />
-            <Button type="primary" onClick={paste}>Paste URL</Button>
-          </Compact>
-          <Checkbox
-            checked={autoCopy}
-            onChange={() => setAutoCopy(!autoCopy)}
-          >
-            <Text italic type={'secondary'}>Auto-copy result to clipboard</Text>
-          </Checkbox>
-          <Space direction={'vertical'}>
-            {
-              isError && <Text
-                type="danger">Error: {unshortenedUrl}</Text>
-            }
-            {!isError && unshortenedUrl && (
-              <div>
-                <Text type={'secondary'}>Unshortened URL:</Text>
-                <br/>
-                <Text copyable>{unshortenedUrl}</Text>
-              </div>
-            )
-            }
-            {
-              isCopied && <Text type="success">Copied to clipboard!</Text>
-            }
-            {
-              copyError && <Text type="danger">
-                Please copy the result manually, clipboard error: {copyError}
-              </Text>
-            }
+              {!isError && unshortenedUrl && (
+                <div>
+                  <Text type={'secondary'}>Unshortened URL:</Text>
+                  <br/>
+                  <Text copyable>{unshortenedUrl}</Text>
+                </div>
+              )
+              }
+              {
+                isCopied && <Text type="success">Copied to clipboard!</Text>
+              }
+              {
+                copyError && <Text type="danger">
+                  Please copy the result manually, clipboard error: {copyError}
+                </Text>
+              }
+            </Space>
           </Space>
-        </Space>
-      </Flex>
+        </Flex>
+      </Content>
+      <Footer style={{textAlign: 'center'}}>
+        <Text type={'secondary'}>v1.1.0 by Cap with</Text> 💙
+      </Footer>
     </Layout>
   );
 }
